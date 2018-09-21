@@ -1,0 +1,14 @@
+{
+    "timestamp": 1537506544076,
+    "webhookEvent": "jira:version_created",
+    "version": {
+        "self": "https://jira.catalysm.net/rest/api/2/version/10112",
+        "id": "10112",
+        "description": "",
+        "name": "1.0",
+        "archived": false,
+        "released": false,
+        "overdue": false,
+        "projectId": 10103
+    }
+}

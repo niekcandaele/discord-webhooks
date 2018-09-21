@@ -1,0 +1,23 @@
+{
+    "port": "13337",
+    "webhooks": [{
+            "type": "jira",
+            "url": "https://jira.example.com",
+            "discordWebhookId": "ID",
+            "discordWebhookToken": "token"
+        },
+        {
+            "type": "confluence",
+            "url": "https://confluence.example.com",
+            "discordWebhookId": "ID",
+            "discordWebhookToken": "token"
+        },
+        {
+            "type": "bitbucket",
+            "url": "https://bitbucket.example.com",
+            "discordWebhookId": "ID",
+            "discordWebhookToken": "token"
+        }
+    ],
+    "saveUnknownResponses": false
+}

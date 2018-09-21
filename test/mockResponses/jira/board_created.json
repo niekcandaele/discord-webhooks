@@ -1,0 +1,10 @@
+{
+    "timestamp": 1537506279559,
+    "webhookEvent": "board_created",
+    "board": {
+        "id": 7,
+        "self": "https://jira.catalysm.net/rest/agile/1.0/board/7",
+        "name": "TEST board",
+        "type": "scrum"
+    }
+}

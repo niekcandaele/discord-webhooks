@@ -1,0 +1,11 @@
+{
+    "timestamp": 1537506447326,
+    "webhookEvent": "sprint_created",
+    "sprint": {
+        "id": 3,
+        "self": "https://jira.catalysm.net/rest/agile/1.0/sprint/3",
+        "state": "future",
+        "name": "TEST Sprint 2",
+        "originBoardId": 6
+    }
+}

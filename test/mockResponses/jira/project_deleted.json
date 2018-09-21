@@ -1,0 +1,24 @@
+{
+    "timestamp": 1537506247337,
+    "webhookEvent": "project_deleted",
+    "project": {
+        "self": "https://jira.catalysm.net/rest/api/2/project/10102",
+        "id": 10102,
+        "key": "TEST",
+        "name": "test",
+        "avatarUrls": {
+            "48x48": "https://jira.catalysm.net/secure/projectavatar?avatarId=10324",
+            "24x24": "https://jira.catalysm.net/secure/projectavatar?size=small&avatarId=10324",
+            "16x16": "https://jira.catalysm.net/secure/projectavatar?size=xsmall&avatarId=10324",
+            "32x32": "https://jira.catalysm.net/secure/projectavatar?size=medium&avatarId=10324"
+        },
+        "projectLead": {
+            "self": "https://jira.catalysm.net/rest/api/2/user?key=catalysm",
+            "name": "Catalysm",
+            "key": "catalysm",
+            "emailAddress": "example@gmail.com",
+            "displayName": "Catalysm"
+        },
+        "assigneeType": "admin.assignee.type.unassigned"
+    }
+}

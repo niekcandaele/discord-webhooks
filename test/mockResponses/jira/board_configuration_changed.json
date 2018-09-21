@@ -1,0 +1,46 @@
+{
+    "timestamp": 1537506279501,
+    "webhookEvent": "board_configuration_changed",
+    "configuration": {
+        "id": 7,
+        "name": "TEST board",
+        "type": "scrum",
+        "self": "https://jira.catalysm.net/rest/agile/1.0/board/7/configuration",
+        "filter": {
+            "id": "10104",
+            "self": "https://jira.catalysm.net/rest/api/2/filter/10104"
+        },
+        "columnConfig": {
+            "columns": [{
+                "name": "To Do",
+                "statuses": [{
+                    "id": "10100",
+                    "self": "https://jira.catalysm.net/rest/api/2/status/10100"
+                }]
+            }, {
+                "name": "In Progress",
+                "statuses": [{
+                    "id": "3",
+                    "self": "https://jira.catalysm.net/rest/api/2/status/3"
+                }]
+            }, {
+                "name": "Done",
+                "statuses": [{
+                    "id": "10002",
+                    "self": "https://jira.catalysm.net/rest/api/2/status/10002"
+                }]
+            }],
+            "constraintType": "none"
+        },
+        "estimation": {
+            "type": "field",
+            "field": {
+                "fieldId": "customfield_10106",
+                "displayName": "Story Points"
+            }
+        },
+        "ranking": {
+            "rankCustomFieldId": 10100
+        }
+    }
+}

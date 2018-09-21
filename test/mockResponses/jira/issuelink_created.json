@@ -1,0 +1,18 @@
+{
+    "timestamp": 1537506171074,
+    "webhookEvent": "issuelink_created",
+    "issueLink": {
+        "id": 10041,
+        "sourceIssueId": 10284,
+        "destinationIssueId": 10289,
+        "issueLinkType": {
+            "id": 10001,
+            "name": "Cloners",
+            "outwardName": "clones",
+            "inwardName": "is cloned by",
+            "subTask": false,
+            "system": false
+        },
+        "systemLink": false
+    }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "discord-jira-webhook",
+  "version": "1.0.0",
+  "description": "Recieve Jira notifcations on  Discord via webhooks",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "discord.js": "^11.4.2",
+    "lodash": "^4.17.11"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0",
+    "node-fetch": "^2.2.0"
+  }
+}
