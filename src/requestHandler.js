@@ -1,5 +1,5 @@
 const http = require("http");
-const jiraEvents = require('./jira-events');
+const webhookEvents = require('../src/webhookEvents');
 const config = require('../config.json');
 const _ = require('lodash');
 
@@ -12,6 +12,9 @@ class RequestHandler {
         this.allowedDomains = webhooks.map(webhook => webhook.webhook.host)
         // Print URL for accessing server
         console.log(`Server running at http://127.0.0.1:${config.port}/`);
+        for (const webhookConfig of webhooks) {
+            console.log(`Listening for "${webhookConfig.webhook.type}" events on ${webhookConfig.webhook.url}`)
+        }
     }
 
     async handleIncomingPostRequest(request, response) {
@@ -29,12 +32,9 @@ class RequestHandler {
                 console.log(error)
             }
 
-            if (!this.checkIfKnownDomains(request)) {
-                response.writeHead(403, `You must register this host in your webhook config: ${request.headers.host}`);
-                return response.end();
-            }
+            let foundWebhook = this.findWebhook(request);
 
-            if (!this.findWebhook(request)) {
+            if (!foundWebhook) {
                 response.writeHead(400, "Unknown web hook");
                 console.log(`Received a request for unknown webhook (please check your config).`);
                 return response.end();
@@ -44,7 +44,7 @@ class RequestHandler {
 
             if (_.isUndefined(foundEvent)) {
                 response.writeHead(404);
-                this.handleUnknownEvent(payload);
+                this.handleUnknownEvent(payload, foundWebhook);
             } else {
                 response.writeHead(200);
                 let generatedEmbed = foundEvent(payload, foundWebhook);
@@ -65,34 +65,23 @@ class RequestHandler {
     }
 
     findWebhook(request) {
-        return _.find(this.webhooks, webhook => {
-            return webhook.webhook.host.startsWith(request.headers.host)
-        })
-    }
 
-    checkIfKnownDomains(request) {
-
-        return !_.isUndefined(_.find(this.allowedDomains, allowedDomain => request.headers.host === allowedDomain))
-
+        return _.find(this.webhooks, (webook => {
+            return _.startsWith(request.url, webook.webhook.url)
+        }))
     }
 
     findEvent(payload, foundWebhook) {
-
-        if (foundWebhook.webhook.type === "jira") {
-            return jiraEvents[payload.webhookEvent]
-        }
-
-        return false
-
+        return webhookEvents[foundWebhook.webhook.type][payload.webhookEvent]
     }
 
-    handleUnknownEvent(payload) {
+    handleUnknownEvent(payload, webhookConfig) {
 
         if (config.saveUnknownResponses) {
 
             const fs = require('fs');
             let dataToSave = JSON.stringify(payload);
-            fs.writeFile(`./data/${payload.webhookEvent}`, dataToSave, {
+            fs.writeFile(`./data/${webhookConfig.webhook.type}-${payload.webhookEvent}.json`, dataToSave, {
                 flag: 'wx'
             }, function (err) {
                 if (!err) console.log(`Saved a new event type to disk: ${payload.webhookEvent}`);
@@ -104,7 +93,6 @@ class RequestHandler {
 
     async sendToDiscord(embed, webhook) {
         try {
-            console.log(`Sending to discord ${JSON.stringify(embed)}`);
             webhook.client.send(embed);
         } catch (error) {
             console.log(error)
