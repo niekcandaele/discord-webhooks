@@ -3,26 +3,28 @@ const config = require('../config.json');
 const _ = require('lodash');
 
 module.exports = {
-    "jira:issue_created": (jiraPayload, webhook) => {
-        console.log('Parsing issue_created payload for webhook ' + JSON.stringify(webhook.webhook));
-
-        if (_.isUndefined(jiraPayload)) {
-            throw new Error("Invalid usage, jiraPayLoad cannot be undefined")
+    "jira:issue_created": (payload) => {
+        if (_.isUndefined(payload)) {
+            throw new Error("Invalid usage, payload cannot be undefined")
         }
 
-
         let embed = new RichEmbed({
-            title: `New issue "${jiraPayload.issue.key} ${jiraPayload.issue.fields.summary}"`,
-            url: `http://${webhook.webhook.host}/browse/${jiraPayload.issue.key}`,
+            title: `New issue "${payload.issue.key} ${payload.issue.fields.summary}"`,
+            url: `http://host/browse/${payload.issue.key}`,
         });
 
-        embed.addField('Project', `[${jiraPayload.issue.fields.project.name}](http://${webhook.webhook.host}/projects/${jiraPayload.issue.key}/issues)`, true)
-        .addField('Issue type', jiraPayload.issue.fields.issuetype.name, true)
-        .setColor('GREEN')
-        .setThumbnail(jiraPayload.user.avatarUrls["48x48"])
-        .setDescription(jiraPayload.issue.fields.description ? jiraPayload.issue.fields.description : "No description.")
-        .setAuthor(jiraPayload.user.name)
+        embed.addField('Project', `[${payload.issue.fields.project.name}](http://host/projects/${payload.issue.key}/issues)`, true)
+            .addField('Issue type', payload.issue.fields.issuetype.name, true)
+            .setColor('GREEN')
+            .setThumbnail(payload.user.avatarUrls["48x48"])
+            .setDescription(payload.issue.fields.description ? payload.issue.fields.description : "No description.")
+            .setAuthor(payload.user.name)
 
         return embed
+    },
+    "board_configuration_changed": (payload) => {
+        if (_.isUndefined(payload)) {
+            throw new Error("Invalid usage, payload cannot be undefined")
+        }
     }
 }

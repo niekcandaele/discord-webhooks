@@ -8,14 +8,14 @@ require("../src/index");
 describe('RequestHandler', function () {
     describe('#handleIncomingPostRequest()', function () {
 
-        beforeEach(function(done) {
+        beforeEach(function (done) {
             setTimeout(done, 500)
         });
 
         for (const mockRequestPayload of mockData) {
             it(`should return ok when a successful POST happens for Jira event ${mockRequestPayload.webhookEvent}`, function (done) {
 
-                fetch(`http://127.0.0.1:${config.port}`, {
+                fetch(`http://localhost:${config.port}`, {
                         method: 'POST',
                         body: JSON.stringify(mockRequestPayload)
                     })
@@ -33,7 +33,7 @@ describe('RequestHandler', function () {
             });
         }
     });
-});
+})
 
 
 function loadMockData() {

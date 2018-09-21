@@ -29,14 +29,12 @@ class RequestHandler {
                 console.log(error)
             }
 
-            let foundWebhook = this.findWebhook(request);
-
             if (!this.checkIfKnownDomains(request)) {
                 response.writeHead(403, `You must register this host in your webhook config: ${request.headers.host}`);
                 return response.end();
             }
 
-            if (!foundWebhook) {
+            if (!this.findWebhook(request)) {
                 response.writeHead(400, "Unknown web hook");
                 console.log(`Received a request for unknown webhook (please check your config).`);
                 return response.end();
