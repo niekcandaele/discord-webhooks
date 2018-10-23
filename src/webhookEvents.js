@@ -10,11 +10,10 @@ module.exports = {
             }
 
             let embed = new RichEmbed({
-                title: `New issue "${payload.issue.key} ${payload.issue.fields.summary}"`,
-                url: `http://host/browse/${payload.issue.key}`,
+                title: `New issue "[${payload.issue.key}] ${payload.issue.fields.summary}"`,
             });
 
-            embed.addField('Project', `[${payload.issue.fields.project.name}](http://host/projects/${payload.issue.key}/issues)`, true)
+            embed.addField('Project', payload.issue.fields.project.name, true)
                 .addField('Issue type', payload.issue.fields.issuetype.name, true)
                 .setColor('GREEN')
                 .setThumbnail(payload.user.avatarUrls["48x48"])
@@ -61,6 +60,25 @@ module.exports = {
             });
 
             embed.addField('Content', payload.comment.body, true)
+                .setThumbnail(payload.comment.author.avatarUrls["48x48"])
+                .setColor('GREEN')
+            return embed
+        },
+        "jira:issue_updated": (payload) => {
+            if (_.isUndefined(payload)) {
+                throw new Error("Invalid usage, payload cannot be undefined")
+            }
+
+            let embed = new RichEmbed({
+                title: `Issue updated "[${payload.issue.key}] ${payload.issue.fields.summary}" by ${payload.user.name}`,
+            });
+
+            embed.addField('Project', payload.issue.fields.project.name, true)
+                .setDescription(payload.issue.fields.description ? payload.issue.fields.description : "No description.")
+                .addField('Status', payload.issue.fields.status.name, true)
+                .addField('Type', payload.issue.fields.issuetype.name, true)
+                .addField('Priority', payload.issue.fields.priority.name, true)
+                .setColor('AQUA')
 
             return embed
         },
