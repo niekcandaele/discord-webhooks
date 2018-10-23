@@ -1,0 +1,41 @@
+{
+    "timestamp": 1540283084638,
+    "webhookEvent": "comment_created",
+    "comment": {
+        "self": "https://jira.catalysm.net/rest/api/2/issue/10329/comment/10115",
+        "id": "10115",
+        "author": {
+            "self": "https://jira.catalysm.net/rest/api/2/user?username=Catalysm",
+            "name": "Catalysm",
+            "key": "catalysm",
+            "emailAddress": "niekcandaele@gmail.com",
+            "avatarUrls": {
+                "48x48": "https://jira.catalysm.net/secure/useravatar?ownerId=catalysm&avatarId=10500",
+                "24x24": "https://jira.catalysm.net/secure/useravatar?size=small&ownerId=catalysm&avatarId=10500",
+                "16x16": "https://jira.catalysm.net/secure/useravatar?size=xsmall&ownerId=catalysm&avatarId=10500",
+                "32x32": "https://jira.catalysm.net/secure/useravatar?size=medium&ownerId=catalysm&avatarId=10500"
+            },
+            "displayName": "Niek Candaele",
+            "active": true,
+            "timeZone": "Etc/UTC"
+        },
+        "body": "commenttt",
+        "updateAuthor": {
+            "self": "https://jira.catalysm.net/rest/api/2/user?username=Catalysm",
+            "name": "Catalysm",
+            "key": "catalysm",
+            "emailAddress": "niekcandaele@gmail.com",
+            "avatarUrls": {
+                "48x48": "https://jira.catalysm.net/secure/useravatar?ownerId=catalysm&avatarId=10500",
+                "24x24": "https://jira.catalysm.net/secure/useravatar?size=small&ownerId=catalysm&avatarId=10500",
+                "16x16": "https://jira.catalysm.net/secure/useravatar?size=xsmall&ownerId=catalysm&avatarId=10500",
+                "32x32": "https://jira.catalysm.net/secure/useravatar?size=medium&ownerId=catalysm&avatarId=10500"
+            },
+            "displayName": "Niek Candaele",
+            "active": true,
+            "timeZone": "Etc/UTC"
+        },
+        "created": "2018-10-23T08:24:44.638+0000",
+        "updated": "2018-10-23T08:24:44.638+0000"
+    }
+}
