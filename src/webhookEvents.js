@@ -51,11 +51,24 @@ module.exports = {
 
             return embed
         },
+        "comment_created": (payload) => {
+            if (_.isUndefined(payload)) {
+                throw new Error("Invalid usage, payload cannot be undefined")
+            }
+
+            let embed = new RichEmbed({
+                title: `New comment by ${payload.comment.author.name}`,
+            });
+
+            embed.addField('Content', payload.comment.body, true)
+
+            return embed
+        },
     },
     "confluence": {
 
     },
     "bitbucket": {
-        
+
     }
 }

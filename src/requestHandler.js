@@ -44,7 +44,7 @@ class RequestHandler {
 
             if (_.isUndefined(foundEvent)) {
                 response.writeHead(404);
-                this.handleUnknownEvent(payload, foundWebhook);
+                this.handleUnknownEvent(payload, foundWebhook, request);
             } else {
                 response.writeHead(200);
                 let generatedEmbed = foundEvent(payload, foundWebhook);
@@ -75,16 +75,29 @@ class RequestHandler {
         return webhookEvents[foundWebhook.webhook.type][payload.webhookEvent]
     }
 
-    handleUnknownEvent(payload, webhookConfig) {
+    handleUnknownEvent(payload, webhookConfig, request) {
 
         if (config.saveUnknownResponses) {
 
             const fs = require('fs');
             let dataToSave = JSON.stringify(payload);
-            fs.writeFile(`./data/${webhookConfig.webhook.type}-${payload.webhookEvent}.json`, dataToSave, {
+
+            let fileName;
+
+            if (request.headers["X-Event-Key"] !== "") {
+                fileName = `./data/${webhookConfig.webhook.type}-${request.headers["X-Event-Key"]}.json`
+            } else {
+                fileName = `./data/${webhookConfig.webhook.type}-${payload.webhookEvent}.json`
+            }
+
+            fs.writeFile(fileName, dataToSave, {
                 flag: 'wx'
             }, function (err) {
-                if (!err) console.log(`Saved a new event type to disk: ${payload.webhookEvent}`);
+                if (!err) {
+                    console.log(`Saved a new event type to disk: ${fileName}.json`);
+                } else {
+                    console.log(err)
+                }
             });
 
         }
